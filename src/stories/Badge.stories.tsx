@@ -15,8 +15,9 @@ const meta: Meta<typeof Badge> = {
 // Esportare i metadati come default
 export default meta;
 
-// Creare un alias di tipo per definire le storie del componente,
-// usando le informazioni contenute nei metadati.
+// Creare un alias di tipo per definire le storie del componente, usando le informazioni contenute nei metadati.
+// `StoryObj<typeof meta>` è un tipo fornito da Storybook per tipizzare correttamente una storia.
+// Usa `meta` per sapere qual è il componente e quali props accetta.
 type Story = StoryObj<typeof meta>;
 
 // Definire una storia chiamata 'Default' per il componente 'Badge'..
