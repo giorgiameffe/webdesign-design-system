@@ -1,11 +1,13 @@
 import type { Preview } from '@storybook/react-vite'
+// Importazione foglio di stile reset
+import "../src/styles/reset.css";
 
 const preview: Preview = {
   parameters: {
     controls: {
       matchers: {
-       color: /(background|color)$/i,
-       date: /Date$/i,
+        color: /(background|color)$/i,
+        date: /Date$/i,
       },
     },
 
