@@ -2,9 +2,8 @@ import React from 'react';
 // Importare i tipi necessari da Storybook per definire i metadati e le storie
 import type { Meta, StoryObj } from '@storybook/react';
 
-// Definire i metadati per il componente 'Badge'.
+// Definire i metadati.
 // - `title` è il nome che apparirà nella sidebar di Storybook.
-// - `component` è il componente React da visualizzare e testare.
 // - `parameters.layout: 'centered'` centra il componente nel canvas.
 // - `tags: ['autodocs']` abilita la documentazione automatica.
 
