@@ -7,6 +7,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 // - `component` è il componente React da visualizzare e testare.
 // - `parameters.layout: 'centered'` centra il componente nel canvas.
 // - `tags: ['autodocs']` abilita la documentazione automatica.
+
 const meta: Meta = {
     title: 'Atoms/Spacing',
     parameters: {
@@ -20,8 +21,8 @@ export default meta;
 // Creare un alias di tipo per definire le storie del componente, usando le informazioni contenute nei metadati.
 // `StoryObj<typeof meta>` è un tipo fornito da Storybook per tipizzare correttamente una storia.
 // Usa `meta` per sapere qual è il componente e quali props accetta.
-type Story = StoryObj<typeof meta>
 
+type Story = StoryObj<typeof meta>
 
 //  Componente che calcola e restituisce il valore effettivo di una variabile CSS
 //  leggendo lo stile calcolato di `document.body`.
@@ -42,7 +43,6 @@ const SpaceCalc = ({ value }: { value: string }) => {
 
     return <span>{spacing}</span>;
 }
-
 
 //  Componente di stile inline che inietta regole CSS personalizzate
 //  per il layout e la visualizzazione della lista `dl`.
@@ -91,7 +91,6 @@ const Style: React.FC = () => {
         </style>
     )
 }
-
 
 // Storia di default per il componente "Spacing".
 // Crea una descrizione visiva delle variabili CSS di spaziatura, mostrandone:
