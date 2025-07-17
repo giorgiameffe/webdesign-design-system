@@ -41,9 +41,9 @@ const Style: React.FC = () => {
                 border: 1px solid #ccc;
                 display: grid;
                 max-width: calc(550rem/16);
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr 1fr 1fr;
                 border-bottom: none;
-                border-radious: 0.5 rem;
+                border-radius: 0.5rem;
                 }
 
                 dt {
@@ -54,8 +54,20 @@ const Style: React.FC = () => {
 
                 dd {
                 padding: var(--spacing-sm) var(--spacing-md);
-                border-bottom: 1px solid #ccc; 
+                border-bottom: 1px solid #ccc;
                 font-family: monospace;
+                displaY: grid;
+                gap: 1ch;
+                grid-template-columns: subgrid;
+                grid-column: 2/4;
+                align-items: center;
+                }
+
+                .info {
+                background: magenta;
+                height: 1ch;
+                width: var(--story-spacing);
+                display: block;          
                 }
                 `
             }
@@ -72,8 +84,11 @@ export const Default: Story = {
                 {['zero', 'xs', 'sm', 'md', 'lg', 'xl'].map((key) => (
                     <React.Fragment key={key}>
                         <dt>{key}</dt>
-                        <dd>
-                            <SpaceCalc value={`--spacing-${key}`} />
+                        <dd style={{ ['--story-spacing' as any]: `var(--spacing-${key})` }}>
+                            <span>
+                                <SpaceCalc value={`--spacing-${key}`} />
+                            </span>
+                            <span className="info" />
                         </dd>
                     </React.Fragment>
                 ))}
