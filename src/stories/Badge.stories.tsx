@@ -9,7 +9,10 @@ import { Badge } from "../components/Badge/Badge";
 // - `component` è il componente React da visualizzare e testare.
 const meta: Meta<typeof Badge> = {
     title: 'Badge',
-    component: Badge
+    component: Badge,
+    parameters: {
+        layout: 'centered'
+    }
 }
 
 // Esportare i metadati come default
