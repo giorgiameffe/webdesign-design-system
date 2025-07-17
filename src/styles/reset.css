@@ -1,34 +1,44 @@
-/* Reset */
+/* Reset di base per assicurare consistenza tra i browser */
 
 *,
 *::after,
 *::before {
+    /* Imposta il box model su border-box per tutti gli elementi e i loro pseudo-elementi */
     box-sizing: border-box;
 }
 
 * {
+    /* Rimuove i margini predefiniti di tutti gli elementi */
     margin: 0;
 }
 
-/* Migliorare leggibilità */
+/* Miglioramenti alla leggibilità del testo */
 
 body {
+    /* Aumenta l'altezza della linea per una migliore leggibilità */
     line-height: 1.25;
+    /* Migliora la resa dei font su WebKit (es. Chrome, Safari) */
     -webkit-font-smoothing: antialiased;
 }
+
+/* Impostazioni per media e elementi grafici */
 
 img,
 picture,
 video,
 canvas,
 svg {
+    /* Imposta il display su block per evitare spazi indesiderati */
     display: block;
+    /* Limita la larghezza massima al 100% del contenitore */
     max-width: 100%;
 }
 
-/* Controlli dei form erediteranno stile dei genitori */
+/* Gli elementi dei form erediteranno stile dai genitori */
 
 :where(input, button, textarea, select) {
+    /* Eredita il font dal contenitore per coerenza stilistica */
     font: inherit;
+    /* Eredita il colore del testo dal contenitore */
     color: inherit;
 }
