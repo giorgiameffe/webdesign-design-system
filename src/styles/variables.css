@@ -1,5 +1,8 @@
 :root {
-    /* Spacing */
+
+    /* Definizione globale delle variabili CSS (custom properties) accessibili ovunque nel progetto */
+    /* Spacing (spaziature): unità standardizzate per margini, padding, gap, ecc. */
+
     --spacing-zero: 0;
     --spacing-xs: 4px;
     --spacing-sm: 8px;
