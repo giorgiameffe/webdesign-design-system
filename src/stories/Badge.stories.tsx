@@ -24,7 +24,7 @@ export default meta;
 // Usa `meta` per sapere qual è il componente e quali props accetta.
 type Story = StoryObj<typeof meta>;
 
-// Definire una storia chiamata 'Default' per il componente 'Badge'..
+// Definire una storia chiamata 'Default' per il componente 'Badge'.
 export const Default: Story = {
     // La proprietà `render` è una funzione che restituisce il JSX del componente da visualizzare.
     // In questo caso, il componente <Badge /> viene renderizzato così com'è, con le sue impostazioni predefinite.
