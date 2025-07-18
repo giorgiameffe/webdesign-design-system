@@ -1,8 +1,10 @@
 import type { Preview } from '@storybook/react-vite'
 // Importazione foglio di stile reset
 import "../src/styles/reset.css";
-// Importazione foglio di stile variabili
+// Importazione spacing
 import "../src/styles/variables.css";
+// Importazione typography
+import "../src/styles/typography.css"
 
 const preview: Preview = {
   parameters: {
