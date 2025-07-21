@@ -1,3 +1,4 @@
+import React, { type ButtonHTMLAttributes } from 'react';
 // Importare i tipi necessari da Storybook per definire i metadati e le storie
 import type { Meta, StoryObj } from '@storybook/react';
 
@@ -12,6 +13,18 @@ export default meta;
 // Creare un alias di tipo per definire le storie del componente, 
 // usando le informazioni contenute nei metadati.
 type Story = StoryObj<typeof meta>;
+
+const ClickToCopy: React.FC<{ value: string } & ButtonHTMLAttributes<HTMLButtonElement>> = ({ value, ...attrs }) => {
+    return (
+        <button className='click-to-copy'
+            {...attrs}
+            style={{ border: 'none', cursor: 'pointer', ...attrs.style }}
+            onClick={() => navigator.clipboard.writeText(value)}
+            aria-label={`Copy ${value}`}
+        >
+        </button>
+    )
+}
 
 // Definire storia `Default` per i colori
 export const Default: Story = {
@@ -40,35 +53,38 @@ export const Default: Story = {
             </style>
 
             <h1>Colors</h1>
-
-            <h2>Gray</h2>
+            <h2>Primitive Colors</h2>
+            <h3>Gray</h3>
             <div className="container">
                 {Array.from({ length: 10 }).map((_, index) => (
-                    <div className="info"
+                    <ClickToCopy className="info"
                         style={{ backgroundColor: `var(--color-gray-${index})` }}
                         key={index}
+                        value={`var(--color-gray-${index})`}
                     />
                 ))}
 
             </div>
 
-            <h2>Green</h2>
+            <h3>Green</h3>
             <div className="container">
                 {Array.from({ length: 10 }).map((_, index) => (
-                    <div className="info"
+                    <ClickToCopy className="info"
                         style={{ backgroundColor: `var(--color-green-${index})` }}
                         key={index}
+                        value={`var(--color-green-${index})`}
                     />
                 ))}
 
             </div>
 
-            <h2>Red</h2>
+            <h3>Red</h3>
             <div className="container">
                 {Array.from({ length: 10 }).map((_, index) => (
-                    <div className="info"
+                    <ClickToCopy className="info"
                         style={{ backgroundColor: `var(--color-red-${index})` }}
                         key={index}
+                        value={`var(--color-red-${index})`}
                     />
                 ))}
 
