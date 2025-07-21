@@ -2,7 +2,6 @@
 
 :root {
     /* Spacing (spaziature): unità standardizzate per margini, padding, gap, ecc. */
-
     --spacing-zero: 0;
     --spacing-xs: clamp(4px, 2px + 0.5vw, 8px);
     --spacing-sm: clamp(8px, 4px + 1vw, 16px);
@@ -10,8 +9,7 @@
     --spacing-lg: clamp(24px, 20px + 1vw, 32px);
     --spacing-xl: clamp(32px, 24px + 2vw, 48px);
 
-    /* Typography */
-
+    /* Typography: dimensioni dei font scalabili per vari livelli di gerarchia */
     --font-size-hero: clamp(3.815rem, 3.573rem + 0.97vw, 4.3rem);
     --font-size-h1: clamp(2.896rem, 2.436rem + 1.838vw, 3.815rem);
     --font-size-h2: clamp(2.488rem, 2.206rem + 1.128vw, 3.052rem);
@@ -25,6 +23,7 @@
 
     /* Colors */
 
+    /* Hue: tonalità di base per la generazione di colori, espressa in gradi HSL (0–360) */
     --hue-red: 25;
     --hue-pink: 350;
     --hue-purple: 310;
@@ -38,7 +37,17 @@
     --hue-yellow: 100;
     --hue-orange: 75;
 
-    /* Gray */
+    /* --- COLORI DEFINITI CON OKLCH --- */
+    /*
+        OKLCH è uno spazio colore moderno, più adatto all'accessibilità e alla percezione visiva umana.
+        Sintassi: oklch(<lightness> <chroma> <hue>)
+        
+        - Lightness (L): luminosità (da 0 a 100%)
+        - Chroma (C): intensità/saturazione del colore (più alto = più vivace)
+        - Hue (H): tonalità in gradi, ma si possono usare variabili (es: var(--hue-indigo))
+    */
+
+    /* GRIGI con hue indaco */
     --color-gray-0: oklch(99% 0.025 var(--hue-indigo));
     --color-gray-1: oklch(95% 0.025 var(--hue-indigo));
     --color-gray-2: oklch(88% 0.025 var(--hue-indigo));
@@ -56,6 +65,7 @@
     --color-gray-14: oklch(15% 0.025 var(--hue-indigo));
     --color-gray-15: oklch(10% 0.025 var(--hue-indigo));
 
+    /* VERDI con hue verde */
     --color-green-0: oklch(99% 0.03 var(--hue-green));
     --color-green-1: oklch(95% 0.06 var(--hue-green));
     --color-green-2: oklch(88% 0.12 var(--hue-green));
@@ -73,7 +83,7 @@
     --color-green-14: oklch(15% 0.06 var(--hue-green));
     --color-green-15: oklch(10% 0.03 var(--hue-green));
 
-    /* Red */
+    /* ROSSI con hue rosso */
     --color-red-0: oklch(99% 0.03 var(--hue-red));
     --color-red-1: oklch(95% 0.06 var(--hue-red));
     --color-red-2: oklch(88% 0.12 var(--hue-red));
@@ -91,22 +101,20 @@
     --color-red-14: oklch(15% 0.06 var(--hue-red));
     --color-red-15: oklch(10% 0.03 var(--hue-red));
 
-    /* Positive colors */
+    /* Semantic Colors: combinazioni standardizzate per contesti specifici */
 
+    /* Colori positivi (es. messaggi di successo) */
     --color-positive-bcg: var(--color-green-1);
     --color-positive-text: var(--color-green-9);
     --color-positive-accent: var(--color-green-6);
 
-    /* Negative colors */
-
+    /* Colori negativi (es. messaggi di errore) */
     --color-negative-bcg: var(--color-red-1);
     --color-negative-text: var(--color-red-9);
     --color-negative-accent: var(--color-red-6);
 
-    /* Neutral colors */
-
+    /* Colori neutri (es. background o testo informativo) */
     --color-neutral-bcg: var(--color-gray-0);
     --color-neutral-text: var(--color-gray-9);
     --color-neutral-accent: var(--color-gray-7);
-
 }
