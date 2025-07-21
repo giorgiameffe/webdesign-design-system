@@ -1,8 +1,10 @@
 // Importa solo i tipi da React (non la libreria intera, perché non serve qui)
 import type React from "react";
-
+// Importa 'root' da 'react-shadow' per usare lo Shadow DOM nei componenti React,
+// utile per isolare stili e struttura dal resto dell'app.
+import root from "react-shadow";
 // Importa il file CSS relativo al componente (contiene gli stili della classe `badge`)
-import "./Badge.css";
+import css from "./Badge.css?raw";
 
 // Definizione dei props che il componente Badge può accettare
 type BadgeProps = {
@@ -18,10 +20,16 @@ export const Badge: React.FC<BadgeProps> = ({
     ...attrs             // Raccoglie tutti gli altri attributi HTML (es: className, style, ecc.)
 }) => {
     return (
-        // Applica classi CSS dinamiche: "badge" + nome variante ("neutral", "positive", ecc.)
-        // E passa anche tutti gli attributi raccolti con ...attrs
-        <div className={`badge ${variant}`} {...attrs}>
-            {children} {/* Inserisce il contenuto all'interno del badge */}
-        </div>
+
+        // Crea un contenitore con Shadow DOM usando react-shadow
+        <root.div>
+            {/* Inserisce gli stili CSS all'interno dello Shadow DOM */}
+            <style>{css}</style>
+            {/* {Applica classi CSS dinamiche: "badge" + nome variante ("neutral", "positive", ecc.)
+             E passa anche tutti gli attributi raccolti con ...attrs} */}
+            <div className={`badge ${variant}`} {...attrs}>
+                {children} {/* Inserisce il contenuto all'interno del badge */}
+            </div>
+        </root.div>
     );
 }
