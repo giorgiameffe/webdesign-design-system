@@ -8,8 +8,14 @@ import { Badge } from "../components/Badge/Badge";
 // - `title` è il nome che apparirà nella sidebar di Storybook.
 // - `component` è il componente React da visualizzare e testare.
 const meta: Meta<typeof Badge> = {
-    title: 'Badge',
+    title: 'Components/Badge',
     component: Badge,
+    argTypes: {
+        children: { control: 'text' }
+    },
+    args: {
+        children: 'Badge'
+    },
     parameters: {
         layout: 'centered'
     },
@@ -29,5 +35,21 @@ export const Default: Story = {
     // La proprietà `render` è una funzione che restituisce il JSX del componente da visualizzare.
     // In questo caso, il componente <Badge /> viene renderizzato così com'è, con le sue impostazioni predefinite.
     // È utile per mostrare il comportamento del componente in uno stato "standard".
-    render: () => <Badge />
+    render: ({ children, variant }) =>
+        <Badge variant={variant}>{children}</ Badge>
 }
+
+export const AllBadges: Story = {
+
+    render: ({ children }) => (
+
+        <>
+            <div style={{ display: 'flex', gap: 'var(--spacing-sm)' }}>
+                <Badge variant='neutral'>{children}</Badge>
+                <Badge variant='positive'>{children}</Badge>
+                <Badge variant='negative'>{children}</Badge>
+            </div>
+        </>
+    ),
+};
+
