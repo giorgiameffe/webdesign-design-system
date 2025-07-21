@@ -35,7 +35,7 @@ export const Default: Story = {
                     `
                 .container {
                 display: grid;
-                grid-template-columns: repeat(10, 1fr);
+                grid-template-columns: repeat(16, 1fr);
                 height: 3rem;
                 margin-bottom: var(--spacing-lg);
                 }
@@ -57,7 +57,7 @@ export const Default: Story = {
             <h2>Primitives</h2>
             <h3>Gray</h3>
             <div className="container">
-                {Array.from({ length: 10 }).map((_, index) => (
+                {Array.from({ length: 16 }).map((_, index) => (
                     <ClickToCopy
                         style={{ backgroundColor: `var(--color-gray-${index})` }}
                         key={index}
@@ -69,7 +69,7 @@ export const Default: Story = {
 
             <h3>Green</h3>
             <div className="container">
-                {Array.from({ length: 10 }).map((_, index) => (
+                {Array.from({ length: 16 }).map((_, index) => (
                     <ClickToCopy
                         style={{ backgroundColor: `var(--color-green-${index})` }}
                         key={index}
@@ -81,7 +81,7 @@ export const Default: Story = {
 
             <h3>Red</h3>
             <div className="container">
-                {Array.from({ length: 10 }).map((_, index) => (
+                {Array.from({ length: 16 }).map((_, index) => (
                     <ClickToCopy
                         style={{ backgroundColor: `var(--color-red-${index})` }}
                         key={index}
