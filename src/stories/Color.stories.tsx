@@ -1,6 +1,7 @@
 // Importare i tipi necessari da Storybook per definire i metadati e le storie
 import type { Meta, StoryObj } from '@storybook/react';
 
+// Definire i metadati per la storia
 const meta: Meta = {
     title: 'Atoms/Colors',
     tags: ['autodocs']
@@ -39,11 +40,34 @@ export const Default: Story = {
             </style>
 
             <h1>Colors</h1>
+
             <h2>Gray</h2>
             <div className="container">
                 {Array.from({ length: 10 }).map((_, index) => (
                     <div className="info"
                         style={{ backgroundColor: `var(--color-gray-${index})` }}
+                        key={index}
+                    />
+                ))}
+
+            </div>
+
+            <h2>Green</h2>
+            <div className="container">
+                {Array.from({ length: 10 }).map((_, index) => (
+                    <div className="info"
+                        style={{ backgroundColor: `var(--color-green-${index})` }}
+                        key={index}
+                    />
+                ))}
+
+            </div>
+
+            <h2>Red</h2>
+            <div className="container">
+                {Array.from({ length: 10 }).map((_, index) => (
+                    <div className="info"
+                        style={{ backgroundColor: `var(--color-red-${index})` }}
                         key={index}
                     />
                 ))}
