@@ -14,20 +14,22 @@ export default meta;
 // usando le informazioni contenute nei metadati.
 type Story = StoryObj<typeof meta>;
 
-// Componente che crea un pulsante cliccabile per copiare un valore negli appunti
+// Componente riutilizzabile che crea un pulsante cliccabile
+// che copia il valore passato (es. variabile CSS) negli appunti
 const ClickToCopy: React.FC<{ value: string } & ButtonHTMLAttributes<HTMLButtonElement>> = ({ value, ...attrs }) => {
     return (
         <button className='click-to-copy'
-            {...attrs} // Altri attributi HTML passati al componente
+            {...attrs} // Propagazione di tutti gli altri attributi HTML del bottone
             style={{ border: 'none', cursor: 'pointer', ...attrs.style }} // Stile di base + eventuali override
-            onClick={() => navigator.clipboard.writeText(value)} // Copia il valore negli appunti al clic
+            // Quando l'utente clicca sul pulsante, viene eseguita questa funzione
+            onClick={() => navigator.clipboard.writeText(value)} // Copia il valore (una stringa) negli appunti del sistema
             aria-label={`Copy ${value}`} // Accessibilità: etichetta per screen reader
         >
         </button>
     )
 }
 
-// Definire storia `Default` per i colori
+// Definizione della storia principale per visualizzare la palette di colori
 export const Default: Story = {
     render: () =>
         <div>
@@ -43,7 +45,7 @@ export const Default: Story = {
 
                 .info {
                 padding: var(--spacing-md);
-                backgroud-color: var(--color-gray-5);
+                background-color: var(--color-gray-5);
                 color: var(--color-gray-10);
                 margin-bottom: var(--spacing-lg);
                 border: 1px solid var(--color-gray-3);
@@ -57,7 +59,7 @@ export const Default: Story = {
             {/* Colori Primitivi */}
             <h2>Primitives</h2>
 
-            {/* Gruppo di grigi (da 0 al 15) */}
+            {/* Gruppo di grigi (da 0 a 15) */}
             <h3>Gray</h3>
             <div className="container">
                 {Array.from({ length: 16 }).map((_, index) => (
@@ -84,16 +86,17 @@ export const Default: Story = {
             {/* Gruppo di rossi (da 0 al 15) */}
             <h3>Red</h3>
             <div className="container">
+                // Crea un array di 16 elementi (da 0 a 15) e cicla su ciascun indice
                 {Array.from({ length: 16 }).map((_, index) => (
                     <ClickToCopy
-                        style={{ backgroundColor: `var(--color-red-${index})` }}
+                        style={{ backgroundColor: `var(--color-red-${index})` }} // Imposta lo sfondo del bottone al valore della variabile CSS corrispondente
                         key={index}
-                        value={`var(--color-red-${index})`}
+                        value={`var(--color-red-${index})`} // La variabile CSS da copiare al clic
                     />
                 ))}
             </div>
 
-            {/* Colori Semantici */}
+            {/* Colori Semantici (basati su significato) */}
             <h2>Semantic</h2>
 
             {/* Colori Neutri */}
@@ -120,8 +123,8 @@ export const Default: Story = {
             <h3>Positive</h3>
             <div className="info" style={{
                 backgroundColor: `var(--color-positive-bcg)`, // Sfondo positivo
-                color: `var(--color-positive-text)`,           // Testo positivo
-                borderColor: `var(--color-positive-accent)`    // Bordo positivo
+                color: `var(--color-positive-text)`,          // Testo positivo
+                borderColor: `var(--color-positive-accent)`   // Bordo positivo
             }}>
                 Per questo box abbiamo usato: {''}
                 <ClickToCopy value={"var(--color-positive-bgc)"}>
@@ -140,8 +143,8 @@ export const Default: Story = {
             <h3>Negative</h3>
             <div className="info" style={{
                 backgroundColor: `var(--color-negative-bcg)`, // Sfondo negativo
-                color: `var(--color-negative-text)`,           // Testo negativo
-                borderColor: `var(--color-negative-accent)`    // Bordo negativo
+                color: `var(--color-negative-text)`,          // Testo negativo
+                borderColor: `var(--color-negative-accent)`   // Bordo negativo
             }}>
                 Per questo box abbiamo usato: {''}
                 <ClickToCopy value={"var(--color-negative-bgc)"}>
