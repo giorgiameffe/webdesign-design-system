@@ -86,7 +86,7 @@ export const Default: Story = {
             {/* Gruppo di rossi (da 0 al 15) */}
             <h3>Red</h3>
             <div className="container">
-                // Crea un array di 16 elementi (da 0 a 15) e cicla su ciascun indice
+                {/* Crea un array di 16 elementi (da 0 a 15) e cicla su ciascun indice */}
                 {Array.from({ length: 16 }).map((_, index) => (
                     <ClickToCopy
                         style={{ backgroundColor: `var(--color-red-${index})` }} // Imposta lo sfondo del bottone al valore della variabile CSS corrispondente
