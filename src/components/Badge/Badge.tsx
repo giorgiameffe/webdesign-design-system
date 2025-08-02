@@ -25,8 +25,8 @@ export const Badge: React.FC<BadgeProps> = ({
         <root.div>
             {/* Inserisce gli stili CSS all'interno dello Shadow DOM */}
             <style>{css}</style>
-            {/* {Applica classi CSS dinamiche: "badge" + nome variante ("neutral", "positive", ecc.)
-             E passa anche tutti gli attributi raccolti con ...attrs} */}
+            {/* Applica classi CSS dinamiche: "badge" + nome variante ("neutral", "positive", ecc.)
+             E passa anche tutti gli attributi raccolti con ...attrs */}
             <div className={`badge ${variant}`} {...attrs}>
                 {children} {/* Inserisce il contenuto all'interno del badge */}
             </div>
