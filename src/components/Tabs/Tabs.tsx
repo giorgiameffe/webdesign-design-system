@@ -14,7 +14,7 @@ import { List as TabsHeader } from "./Tabs.List";
 import { TabsContext } from "./Tabs.Context";
 
 // Importa il componente che visualizza il contenuto del tab attivo, rinominato per chiarezza
-import { Tab as TabsPanel } from "./Tabs.Tab";
+import { Tab as TabsPanel } from "./Tabs.tab";
 
 /*
  Verifica che un nodo React sia un elemento valido di tipo <Tabs.Item>.
