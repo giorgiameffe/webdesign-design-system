@@ -7,6 +7,8 @@ import { Tabs } from "../components/Tabs/Tabs";
 // Per incapsulare stili usando Shadow DOM (utile in ambienti isolati)
 import root from "react-shadow";
 
+import { Badge } from "../components/Badge/Badge";
+
 // Definizione dei metadati per Storybook: titolo, componente, e tag
 const meta: Meta<typeof Tabs> = {
     title: "Components/Tabs",    // Nome e sezione visibile nella UI di Storybook
@@ -46,20 +48,59 @@ const Skeleton: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     );
 };
 
-// Storia di esempio che mostra Tabs con varie etichette e contenuti
 export const Default: Story = {
     render: () => (
-        <Tabs>
-            {/* Ogni <Tabs.Item> rappresenta un tab cliccabile con contenuto associato */}
+        <Tabs> {/* Contenitore principale delle tab */}
+
+            {/* Prima tab con etichetta semplice */}
             <Tabs.Item label="Label 1">
-                <Skeleton>Tab content 1</Skeleton>
+                <Skeleton>Tab content 1</Skeleton> {/* Contenuto del pannello 1 */}
             </Tabs.Item>
+
+            {/* Seconda tab con etichetta semplice */}
             <Tabs.Item label="Label 2">
-                <Skeleton>Tab content 2</Skeleton>
+                <Skeleton>Tab content 2</Skeleton> {/* Contenuto del pannello 2 */}
             </Tabs.Item>
+
+            {/* Terza tab con etichetta semplice */}
             <Tabs.Item label="Label 3">
-                <Skeleton>Tab content 3</Skeleton>
+                <Skeleton>Tab content 3</Skeleton> {/* Contenuto del pannello 3 */}
             </Tabs.Item>
+
+            {/* Tab con etichetta customizzata: testo + badge "New" */}
+            <Tabs.Item
+                label={
+                    <span>
+                        Label 3 <Badge>New</Badge> {/* Badge evidenzia che è una novità */}
+                    </span>
+                }
+            >
+                <Skeleton>Tab content 3</Skeleton> {/* Contenuto ripetuto per esempio */}
+            </Tabs.Item>
+
+            {/* Tab con badge "Positive" e variante visiva positiva */}
+            <Tabs.Item
+                label={
+                    <span>
+                        Label 4 <Badge variant="positive">Positive</Badge>
+                    </span>
+                }
+            >
+                <Skeleton>Tab content 4</Skeleton>
+            </Tabs.Item>
+
+            {/* Tab con badge "Negative" e variante visiva negativa */}
+            <Tabs.Item
+                label={
+                    <span>
+                        Label 5 <Badge variant="negative">Negative</Badge>
+                    </span>
+                }
+            >
+                <Skeleton>Tab content 5</Skeleton>
+            </Tabs.Item>
+
         </Tabs>
     ),
 };
+
