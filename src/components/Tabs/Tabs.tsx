@@ -1,97 +1,93 @@
-// Importa solo il tipo ReactElement per tipizzare i children
+// Importa il tipo ReactElement per la type guard
 import type { ReactElement } from "react";
 
-// Importa React per poter usare JSX, hook e altre funzioni
+// Importa React e i suoi hook
 import React from "react";
 
-// Importa il componente <Tabs.Item> e il tipo dei suoi props
+// Importa il componente <Item> e le sue props
 import { Item, type ItemProps } from "./Tabs.Item";
 
-// Importa il componente che renderizza le etichette dei tab, rinominato per chiarezza
-import { List as TabsHeader } from "./Tabs.List";
+// Importa il componente della lista di tab (header con i bottoni)
+import { List } from "./Tabs.List";
 
-// Importa il contesto React per condividere lo stato del tab attivo
+// Importa il contesto per la gestione dello stato attivo
 import { TabsContext } from "./Tabs.Context";
 
-// Importa il componente che visualizza il contenuto del tab attivo, rinominato per chiarezza
-import { Tab as TabsPanel } from "./Tabs.tab";
+// Importa il componente per i pannelli dei tab
+import { Tab } from "./Tabs.tab";
 
-/*
- Verifica che un nodo React sia un elemento valido di tipo <Tabs.Item>.
- Questo serve per filtrare solo i figli rilevanti all’interno del componente Tabs.
-*/
+// Importa react-shadow per creare un Shadow DOM
+import root from "react-shadow";
 
-const isValidTabsItem = (
+// Importa il CSS raw come stringa per iniettarlo dinamicamente
+import css from "./Tabs.css?raw";
+
+// Type guard: verifica se un child è un <Item />
+const isTabValidChildren = (
     child: React.ReactNode,
 ): child is ReactElement<typeof Item> => {
     return React.isValidElement(child) && child.type === Item;
 };
 
+// Props accettate dal componente Tabs: figli React e altre HTML props
 type TabsProps = {
     children: React.ReactNode;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-/*
- Componente Tabs – gestisce un'interfaccia a tab con intestazioni cliccabili e pannelli di contenuto associati.
- Usa il context interno per tracciare quale tab è attivo e isola gli stili tramite Shadow DOM.
-*/
-
+// Componente principale Tabs
 export const Tabs: React.FC<TabsProps> & { Item: typeof Item } = ({
     children,
-    ...props
 }) => {
-    const baseId = React.useId(); // Base per generare ID univoci per ogni tab
-    const [activeTabId, setActiveTabId] = React.useState(`${baseId}-0`);
+    // Crea un ID base unico per i tab
+    const id = React.useId();
 
-    // Estrae tutti i figli validi di tipo <Tabs.Item>, associando a ciascuno un ID univoco e la sua etichetta.
+    // Stato per tracciare quale tab è attivo, parte dal primo
+    const [activeTab, setActiveTab] = React.useState(id + 0);
 
-    const tabItems = React.Children.toArray(children)
-        .filter(isValidTabsItem)
-        .map((element, index) => ({
-            element, // Il nodo React originale (<Tabs.Item />)
-            id: `${baseId}-${index}`, // ID univoco per gestire attivazione
-            label: (element.props as ItemProps).label, // Etichetta da mostrare nel tab header
-        }));
+    // Estrae solo i figli validi (<Tabs.Item>) e assegna loro un ID unico
+    const validChildren = React.Children.toArray(children)
+        .filter(isTabValidChildren)
+        .map((child, i) => ({ ...child, id: id + i }));
 
-    // Se ci sono figli non validi, avvisa nello sviluppo.
+    // Prepara un array con le etichette e gli ID dei tab per il rendering della lista
+    const tabsLabels = validChildren.map((child) => ({
+        label: (child.props as unknown as ItemProps).label,
+        tabId: child.id,
+    }));
 
-    if (tabItems.length !== React.Children.count(children)) {
-        console.warn(
-            "[Tabs] Alcuni figli passati al componente non sono <Tabs.Item> e verranno ignorati nella navigazione."
-        );
+    // Se ci sono figli non validi, mostra un warning in console
+    if (validChildren.length !== React.Children.count(children)) {
+        console.warn("Invalid children for Tabs");
     }
 
     return (
-        <root.div role="tablist" {...props}>
-            {/* Stili globali e specifici dei Tabs (iniettati nel Shadow DOM) */}
-            <GlobalStyles />
-            <style>{css}</style>
+        // Usa Shadow DOM per isolare markup e stili
+        <root.div role="tablist">
+            <style>{css}</style>       {/* Inietta dinamicamente lo stile CSS del componente */}
+            <TabsContext.Provider value={{ activeTab, setActiveTab }}>
+                {/* Renderizza la lista di tab (bottoni) */}
+                <List tabsLabels={tabsLabels} />
 
-            {/* Fornisce il contesto a <Tabs.List> e <Tabs.Tab> */}
-            <TabsContext.Provider value={{ activeTab: activeTabId, setActiveTab: setActiveTabId }}>
-                {/* Renderizza l'intestazione dei tab (le etichette cliccabili) */}
-                <TabsHeader
-                    tabsLabels={tabItems.map(({ label, id }) => ({
-                        label,
-                        tabId: id,
-                    }))}
-                />
+                {/* Renderizza il contenuto dei tab (pannelli) */}
+                {validChildren.map(({ id, ...child }) => {
+                    return (
+                        <Tab id={id} key={id}>
+                            {child}
+                        </Tab>
+                    );
+                })}
 
-                {/* Renderizza ciascun contenuto tab associato a un'etichetta */}
-                {tabItems.map(({ id, element }) => (
-                    <TabsPanel id={id} key={id}>
-                        {element}
-                    </TabsPanel>
-                ))}
-
-                {/* Renderizza eventuali figli non validi, ad esempio testo o altri elementi */}
-                {React.Children.map(children, (child) =>
-                    !isValidTabsItem(child) ? child : null
-                )}
+                {/* Renderizza i figli non validi (cioè non <Tabs.Item>) senza modificarli */}
+                {React.Children.map(children, (child) => {
+                    if (!isTabValidChildren(child)) {
+                        return child;
+                    }
+                    return null;
+                })}
             </TabsContext.Provider>
         </root.div>
     );
 };
 
-// Associa Tabs.Item al componente <Item /> per l'uso come <Tabs.Item>
+// Aggiunge la proprietà statica Tabs.Item per usare <Tabs.Item> nei consumer
 Tabs.Item = Item;
