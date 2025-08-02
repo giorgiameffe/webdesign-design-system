@@ -22,6 +22,10 @@ import root from "react-shadow";
 // Importa il CSS raw come stringa per iniettarlo dinamicamente
 import css from "./Tabs.css?raw";
 
+// Importa il componente che inietta gli stili globali (reset + tipografia)
+// all'interno del DOM o dello Shadow DOM tramite un tag <style>
+import { GlobalStyles } from "../GlobalStyles";
+
 // Type guard: verifica se un child è un <Item />
 const isTabValidChildren = (
     child: React.ReactNode,
@@ -63,6 +67,7 @@ export const Tabs: React.FC<TabsProps> & { Item: typeof Item } = ({
     return (
         // Usa Shadow DOM per isolare markup e stili
         <root.div role="tablist">
+            <GlobalStyles />    {/* Inietta gli stili globali */}
             <style>{css}</style>       {/* Inietta dinamicamente lo stile CSS del componente */}
             <TabsContext.Provider value={{ activeTab, setActiveTab }}>
                 {/* Renderizza la lista di tab (bottoni) */}
