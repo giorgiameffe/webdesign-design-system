@@ -1,32 +1,31 @@
-// Importa i tipi da Storybook per tipizzare la storia (Meta, StoryObj)
+// Tipi utili per tipizzare il componente e le storie in Storybook
 import type { Meta, StoryObj } from "@storybook/react";
 
-// Importa il componente Tabs da testare
+// Importazione del componente Tabs da testare e documentare
 import { Tabs } from "../components/Tabs/Tabs";
 
-// Importa react-shadow per usare Shadow DOM nel componente di esempio
+// Per incapsulare stili usando Shadow DOM (utile in ambienti isolati)
 import root from "react-shadow";
 
-// Importa il componente Badge, usato nelle label dei tab
-import { Badge } from "../components/Badge/Badge";
-
-// Definisce i metadati della storia per Storybook
+// Definizione dei metadati per Storybook: titolo, componente, e tag
 const meta: Meta<typeof Tabs> = {
-    title: "Components/Tabs",    // Percorso nella sidebar di Storybook
-    component: Tabs,             // Componente da documentare
-    tags: ['autodocs']           // Tag usato da Storybook per generare automaticamente i docs
+    title: "Components/Tabs",    // Nome e sezione visibile nella UI di Storybook
+    component: Tabs,             // Componente associato a questa storia
+    tags: ['autodocs']           // Abilita la generazione automatica dei docs
 };
 
-// Esporta il meta come default (obbligatorio per ogni file .stories.tsx)
+// Esporta il meta come default per Storybook (richiesto)
 export default meta;
 
-// Definisce il tipo base della storia
+// Alias per tipizzare la storia in base al componente Tabs
 type Story = StoryObj<typeof Tabs>;
 
-// Componente Skeleton per mostrare un contenuto placeholder in ogni tab
+// Componente placeholder che simula contenuto nei pannelli delle tab
 const Skeleton: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return (
-        <root.div> {/* Usa Shadow DOM per incapsulare gli stili del blocco */}
+        // Shadow DOM per isolare lo stile dal resto della pagina
+        <root.div>
+            {/* Stile inline iniettato per il contenitore scheletro */}
             <style>{`
 				div {
 					text-align: center;
@@ -39,62 +38,27 @@ const Skeleton: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 					align-content: center;
 				}
 			`}</style>
-            <div>{children}</div> {/* Contenuto passato come children */}
-            <div /> {/* Altri div vuoti per simulare blocchi o righe scheletro */}
+            <div>{children}</div> {/* Mostra il contenuto testuale/JSX passato */}
+            <div /> {/* Placeholder vuoti per completare l’aspetto del contenuto */}
             <div />
             <div />
         </root.div>
     );
 };
 
-// Definisce la storia "Default" che mostra Tabs con vari <Tabs.Item />
+// Storia di esempio che mostra Tabs con varie etichette e contenuti
 export const Default: Story = {
     render: () => (
         <Tabs>
-            {/* Tab semplice con testo */}
+            {/* Ogni <Tabs.Item> rappresenta un tab cliccabile con contenuto associato */}
             <Tabs.Item label="Label 1">
                 <Skeleton>Tab content 1</Skeleton>
             </Tabs.Item>
-
             <Tabs.Item label="Label 2">
                 <Skeleton>Tab content 2</Skeleton>
             </Tabs.Item>
-
             <Tabs.Item label="Label 3">
                 <Skeleton>Tab content 3</Skeleton>
-            </Tabs.Item>
-
-            {/* Tab con Badge "New" accanto all'etichetta */}
-            <Tabs.Item
-                label={
-                    <span>
-                        Label 3 <Badge>New</Badge>
-                    </span>
-                }
-            >
-                <Skeleton>Tab content 3</Skeleton>
-            </Tabs.Item>
-
-            {/* Tab con Badge "Positive" (verde, ad esempio) */}
-            <Tabs.Item
-                label={
-                    <span>
-                        Label 4 <Badge variant="positive">Positive</Badge>
-                    </span>
-                }
-            >
-                <Skeleton>Tab content 4</Skeleton>
-            </Tabs.Item>
-
-            {/* Tab con Badge "Negative" (rosso, ad esempio) */}
-            <Tabs.Item
-                label={
-                    <span>
-                        Label 5 <Badge variant="negative">Negative</Badge>
-                    </span>
-                }
-            >
-                <Skeleton>Tab content 5</Skeleton>
             </Tabs.Item>
         </Tabs>
     ),
