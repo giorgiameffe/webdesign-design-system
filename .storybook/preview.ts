@@ -4,7 +4,9 @@ import "../src/styles/reset.css";
 // Importazione spacing
 import "../src/styles/variables.css";
 // Importazione typography
-import "../src/styles/typography.css"
+import "../src/styles/typography.css";
+// Dark-light mode
+import { withThemeByClassName } from "@storybook/addon-themes";
 
 const preview: Preview = {
   parameters: {
@@ -20,8 +22,17 @@ const preview: Preview = {
       // 'error' - fail CI on a11y violations
       // 'off' - skip a11y checks entirely
       test: 'todo'
-    }
+    },
   },
-};
 
-export default preview;
+  decorators: [
+    withThemeByClassName({
+      themes: {
+        light: "light-theme",
+        dark: "dark-theme",
+      },
+      defaultTheme: "light",
+      parentSelector: "body",
+    }),
+  ],
+};
