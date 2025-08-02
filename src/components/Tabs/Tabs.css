@@ -13,16 +13,23 @@
     padding: var(--spacing-sm);
     border-radius: 100vw;
     min-height: calc(42rem / 16);
+    /* Animazione fluida su hover/selezione */
     transition: all var(--timing-fast) ease-in-out;
+
+    /* Stile al passaggio del mouse */
 
     &:hover {
         background-color: light-dark(var(--color-gray-1), var(--color-gray-15));
     }
 
+    /* Stile se il tab è selezionato */
+
     &[aria-selected="true"] {
         background-color: light-dark(var(--color-gray-15), var(--color-gray-1));
         color: light-dark(var(--color-gray-0), var(--color-gray-15));
     }
+
+    /* Stile al focus via tastiera (accessibilità) */
 
     &:focus-visible {
         outline: 2px solid light-dark(var(--color-gray-8), var(--color-gray-2));
@@ -30,6 +37,8 @@
     }
 
 }
+
+/* Definisce un'animazione di entrata (fade + slide up) */
 
 @keyframes fadeIn {
     from {
@@ -42,6 +51,8 @@
         transform: translateY(0);
     }
 }
+
+/* Applica l'animazione ai pannelli tab */
 
 [role="tabpanel"] {
     animation: fadeIn var(--timing-fast) ease-in-out;

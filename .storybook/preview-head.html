@@ -1,15 +1,21 @@
 <style>
+    /* Imposta il color-scheme generale su 'light' di default */
     body {
         color-scheme: light;
 
+        /* Se il body ha la classe 'dark-theme', usa il color-scheme 'dark' */
         &:where(.dark-theme) {
             color-scheme: dark;
         }
     }
 
+    /* Imposta il colore del testo e lo sfondo sia per il body 
+       sia per l'anteprima della documentazione in Storybook */
     body,
     .sbdocs-preview.sbdocs-preview {
         color: var(--color-neutral-text);
+        /* Colore testo neutro */
         background-color: var(--color-neutral-bcg);
+        /* Colore sfondo neutro */
     }
 </style>
