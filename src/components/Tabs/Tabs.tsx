@@ -14,7 +14,7 @@ import { List } from "./Tabs.List";
 import { TabsContext } from "./Tabs.Context";
 
 // Importa il componente per i pannelli dei tab
-import { Tab } from "./Tabs.tab";
+import { Tab } from "./Tabs.Tab";
 
 // Importa react-shadow per creare un Shadow DOM
 import root from "react-shadow";
@@ -66,7 +66,7 @@ export const Tabs: React.FC<TabsProps> & { Item: typeof Item } = ({
 
     return (
         // Usa Shadow DOM per isolare markup e stili
-        <root.div role="tablist">
+        <root.div data-testid="tabs-root">
             <GlobalStyles />    {/* Inietta gli stili globali */}
             <style>{css}</style>       {/* Inietta dinamicamente lo stile CSS del componente */}
             <TabsContext.Provider value={{ activeTab, setActiveTab }}>
