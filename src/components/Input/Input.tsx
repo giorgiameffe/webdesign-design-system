@@ -18,17 +18,27 @@ type InputProps = {
     kind: "text" | "email" | "password";
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
+
 type SelectProps = {
     kind: "select";
     options: { label: string; value: string }[];
     placeholder?: string;
 } & React.SelectHTMLAttributes<HTMLSelectElement>;
 
-type GeneralInputProps = (InputProps | SelectProps) & {
+
+type RadioProps = {
+    kind: "radio";
+    options: { label: string; value: string }[];
+    placeholder?: never;
+    name: string;
+} & React.InputHTMLAttributes<HTMLInputElement>;
+
+
+type GeneralInputProps = (InputProps | SelectProps | RadioProps) & {
     label: React.ReactNode;
 };
 
-export const InternalInput: React.FC<InputProps | SelectProps> = (
+export const InternalInput: React.FC<InputProps | SelectProps | RadioProps> = (
     props
 ) => {
     switch (props.kind) {
@@ -46,6 +56,17 @@ export const InternalInput: React.FC<InputProps | SelectProps> = (
                         </option>
                     ))}
                 </select>
+            );
+        case "radio":
+            return (
+                <>
+                    {props.options.map((option) => (
+                        <label key={option.value}>
+                            <input type="radio" {...props} value={option.value} />
+                            {option.label}
+                        </label>
+                    ))}
+                </>
             );
         default:
             return <input type={props.kind} {...props} />;

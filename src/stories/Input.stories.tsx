@@ -23,8 +23,8 @@ export const Default: Story = {
                 { label: "Option 1", value: "1" },
                 { label: "Option 2", value: "2" },
             ]}
-            kind="select"
+            kind="radio"
             label="Label"
-            placeholder="Placeholder"
+            name="ciao"
         />
 }
