@@ -75,11 +75,14 @@ export const InternalInput: React.FC<InputProps | SelectProps | RadioProps> = (
 
 export const Input: React.FC<GeneralInputProps> = ({ label, id, ...props }) => {
     const defaultId = React.useId() || id;
-
     return (
         <>
-            <label htmlFor={defaultId}>{label}</label>
+            {props.kind === "radio" ? (
+                <span>{label}</span>
+            ) : (
+                <label htmlFor={defaultId}>{label}</label>
+            )}
             <InternalInput {...props} id={defaultId} />
         </>
-    )
+    );
 };
