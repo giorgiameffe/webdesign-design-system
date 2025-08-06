@@ -12,44 +12,58 @@
     />
 */
 
+// Importa React per poter usare JSX e gli hook (come useId)
 import React from "react";
 
+
+// Definisce le props per un input standard
 type InputProps = {
-    kind: "text" | "email" | "password";
-} & React.InputHTMLAttributes<HTMLInputElement>;
+    kind: "text" | "email" | "password"; // Specifica il tipo di input base
+} & React.InputHTMLAttributes<HTMLInputElement>; // Estende tutte le props standard degli <input>
 
 
+// Definisce le props per un menu a tendina (select).
 type SelectProps = {
-    kind: "select";
-    options: { label: string; value: string }[];
-    placeholder?: string;
-} & React.SelectHTMLAttributes<HTMLSelectElement>;
+    kind: "select"; // Discriminatore per il tipo "select"
+    options: { label: string; value: string }[]; // Lista delle opzioni da mostrare nel <select>
+    placeholder?: string; // Opzionale: prima opzione disabilitata
+} & React.SelectHTMLAttributes<HTMLSelectElement>; // Props standard di <select>
 
 
+// Definisce le props per un gruppo di radio button.
 type RadioProps = {
-    kind: "radio";
-    options: { label: string; value: string }[];
-    placeholder?: never;
-    name: string;
-} & React.InputHTMLAttributes<HTMLInputElement>;
+    kind: "radio"; // Discriminatore per il tipo "radio"
+    options: { label: string; value: string }[]; // Opzioni da mappare come radio buttons
+    placeholder?: never; // I radio non supportano placeholder
+    name: string; // Obbligatorio per raggruppare i radio buttons
+} & React.InputHTMLAttributes<HTMLInputElement>; // Props standard degli <input>
 
 
+// Un tipo unione che combina tutti i tipi di input possibili e aggiunge una proprietà `label`,
+// che è obbligatoria per tutti.
 type GeneralInputProps = (InputProps | SelectProps | RadioProps) & {
-    label: React.ReactNode;
+    label: React.ReactNode; // Etichetta da mostrare sopra o accanto all'input
 };
 
+
+// Il componente principale che renderizza l'effettivo elemento di input in base alla prop `kind`.
+// Non è pensato per essere usato direttamente, ma per essere incapsulato dal componente `Input`.
 export const InternalInput: React.FC<InputProps | SelectProps | RadioProps> = (
     props
 ) => {
+    // Controlla il tipo di input da renderizzare usando il discriminatore "kind"
     switch (props.kind) {
+        // Caso per il tipo "select": crea un elemento <select> con tutte le props passate
         case "select":
             return (
                 <select {...props}>
+                    {/* Se è definito un placeholder, lo inserisce come prima option disabilitata */}
                     {props.placeholder && (
                         <option value="" disabled selected>
                             {props.placeholder}
                         </option>
                     )}
+                    {/* Mappa le opzioni e le visualizza */}
                     {props.options.map((option) => (
                         <option key={option.value} value={option.value}>
                             {option.label}
@@ -57,9 +71,11 @@ export const InternalInput: React.FC<InputProps | SelectProps | RadioProps> = (
                     ))}
                 </select>
             );
+        // Caso per il tipo "radio": genera un gruppo di radio button con etichette associate
         case "radio":
             return (
                 <>
+                    {/* Per ogni opzione, crea un input radio con etichetta */}
                     {props.options.map((option) => (
                         <label key={option.value}>
                             <input type="radio" {...props} value={option.value} />
@@ -69,19 +85,30 @@ export const InternalInput: React.FC<InputProps | SelectProps | RadioProps> = (
                 </>
             );
         default:
+            // Per input base (text, email, password), restituisce un normale input
             return <input type={props.kind} {...props} />;
     }
 };
 
+
+// Il componente `Input` principale, responsabile di renderizzare l'etichetta e l'`InternalInput`.
+// È il componente che dovrebbe essere utilizzato dal resto dell'applicazione.
 export const Input: React.FC<GeneralInputProps> = ({ label, id, ...props }) => {
+
+    // Usa useId per generare un ID se non è stato passato (NB: questo ignora il valore di `id` se definito)
     const defaultId = React.useId() || id;
+
     return (
         <>
+            {/* Se è un gruppo di radio button, mostra il label come semplice testo */}
             {props.kind === "radio" ? (
                 <span>{label}</span>
             ) : (
+                // Altrimenti, crea un elemento <label> associato all'input
                 <label htmlFor={defaultId}>{label}</label>
             )}
+
+            {/* Mostra l’input vero e proprio */}
             <InternalInput {...props} id={defaultId} />
         </>
     );
