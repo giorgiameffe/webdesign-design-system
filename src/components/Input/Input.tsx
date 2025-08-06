@@ -17,7 +17,8 @@ type InputProps = {
 type SelectProps = {
     kind: "select";
     label: React.ReactNode;
-    options: { label: React.ReactNode; value: string }[];
+    options: { label: string; value: string }[];
+    placeholder?: string;
 } & React.SelectHTMLAttributes<HTMLSelectElement>;
 
 export const Input: React.FC<InputProps | SelectProps> = ({ label, id, ...props }) => {
@@ -28,7 +29,19 @@ export const Input: React.FC<InputProps | SelectProps> = ({ label, id, ...props 
         <>
             <label htmlFor={defaultId}>{label}</label>
             {props.kind === "select" ? (
-                <select {...props} id={defaultId} />
+                <select {...props} id={defaultId}>
+                    {props.placeholder && (
+                        <option value="" disabled selected>
+                            {props.placeholder}
+                        </option>
+                    )}
+                    {props.options.map((option) => (
+                        <option key={option.value} value={option.value}>
+                            {option.label}
+                        </option>
+
+                    ))}
+                </select>
             ) : (
                 <input id={defaultId} type={props.kind} {...props} />
             )}
