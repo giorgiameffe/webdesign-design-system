@@ -9,6 +9,7 @@ const meta: Meta = {
     args: {
         label: "Label",
     },
+    tags: ['autodocs']
 };
 
 export default meta;
