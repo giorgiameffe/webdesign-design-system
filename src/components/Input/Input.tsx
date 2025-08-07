@@ -99,23 +99,27 @@ export const InternalInput: React.FC<InputProps | SelectProps | RadioProps> = (
 
 // Il componente `Input` principale, responsabile di renderizzare l'etichetta e l'`InternalInput`.
 // È il componente che dovrebbe essere utilizzato dal resto dell'applicazione.
-export const Input: React.FC<GeneralInputProps> = ({ label, id, ...props }) => {
+export const Input: React.FC<GeneralInputProps> = ({ label, id, className, ...props }) => {
 
     // Usa useId per generare un ID se non è stato passato (NB: questo ignora il valore di `id` se definito)
     const defaultId = React.useId() || id;
 
     return (
-        <>
-            {/* Se è un gruppo di radio button, mostra il label come semplice testo */}
-            {props.kind === "radio" ? (
-                <span>{label}</span>
-            ) : (
-                // Altrimenti, crea un elemento <label> associato all'input
-                <label htmlFor={defaultId}>{label}</label>
-            )}
+        <root.div>
+            {/* Inietta dinamicamente lo stile CSS del componente */}
+            <style>{css}</style>
+            <div className={`${className ?? ""} container`}>
+                {/* Se è un gruppo di radio button, mostra il label come semplice testo */}
+                {props.kind === "radio" ? (
+                    <span>{label}</span>
+                ) : (
+                    // Altrimenti, crea un elemento <label> associato all'input
+                    <label htmlFor={defaultId}>{label}</label>
+                )}
 
-            {/* Mostra l’input vero e proprio */}
-            <InternalInput {...props} id={defaultId} />
-        </>
-    );
+                {/* Mostra l’input vero e proprio */}
+                <InternalInput {...props} id={defaultId} />
+            </div>
+        </root.div>
+    )
 };
