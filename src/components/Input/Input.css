@@ -51,10 +51,25 @@ svg {
 
 }
 
-input:not([type="radio"]),
-select {
+.input-container {
+    display: grid;
+    grid-template-rows: subgrid;
     grid-row: 2/3;
     grid-column: 1/4;
+    border: 1px solid light-dark(var(--color-gray-9), var(--color-gray-1));
+    border-radius: 0.25rem;
+}
+
+.input-container:has(:where(input, select):focus-visible) {
+    outline: 2px solid light-dark(var(--color-gray-9), var(--color-gray-1));
+}
+
+input:not([type="radio"]),
+select {
     min-height: calc(16rem / 16);
 
+}
+
+:where(input, select):focus {
+    outline: none;
 }
