@@ -34,10 +34,14 @@ type Story = StoryObj<typeof meta>;
 // STORIE
 // =======================================
 
+// Storia che mostra tutte le varianti dell'input in un unico esempio
 export const Default: Story = {
     render: ({ label }) => (
         <div>
+            {/* Input standard con icona */}
             <Input label={label} kind="text" icon="Book" iconPosition="left" placeholder="Placeholder" />
+
+            {/* Input di tipo select con opzioni */}
             <Input
                 label={label}                // Etichetta del campo
                 options={[                  // Opzioni del menu a discesa
@@ -46,6 +50,8 @@ export const Default: Story = {
                 ]}
                 kind="select"               // Specifica che si tratta di un select
             />
+
+            {/* Input di tipo radio con opzioni */}
             <Input
                 label={label}               // Etichetta del gruppo di radio
                 options={[                  // Opzioni dei radio button (stessa struttura del select)

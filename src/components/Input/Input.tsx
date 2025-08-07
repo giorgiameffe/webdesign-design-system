@@ -114,13 +114,17 @@ export const Input: React.FC<GeneralInputProps> = ({ label, id, className, icon,
     // Usa useId per generare un ID se non è stato passato (NB: questo ignora il valore di `id` se definito)
     const defaultId = React.useId() || id;
 
+    // Recupera il componente dell'icona se definito
     const IconComponent = icon ? Icon[icon] : null;
 
     return (
         <root.div>
+            {/* Applica gli stili globali, se presenti */}
             <GlobalStyles />
             {/* Inietta dinamicamente lo stile CSS del componente */}
             <style>{css}</style>
+
+            {/* Contenitore principale con classi dinamiche */}
             <div className={`${className ?? ""} container ${props.kind}`}>
                 {/* Se è un gruppo di radio button, mostra il label come semplice testo */}
                 {props.kind === "radio" ? (
@@ -131,7 +135,9 @@ export const Input: React.FC<GeneralInputProps> = ({ label, id, className, icon,
                 )}
 
                 {/* Mostra l’input vero e proprio */}
-                <div className="input-container"><InternalInput {...props} id={defaultId} />
+                <div className="input-container">
+                    <InternalInput {...props} id={defaultId} />
+                    {/* Se c'è un'icona, la mostra nella posizione specificata */}
                     {IconComponent && (
                         <div className={`icon ${iconPosition || ""}`}>
                             <IconComponent />

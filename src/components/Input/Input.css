@@ -1,70 +1,103 @@
+/* ==================================================
+   Contenitore principale del componente Input
+   ================================================== */
 .container {
     display: grid;
+    /* Layout a griglia per disporre label, input e icona */
     grid-template-rows: repeat(3, auto);
+    /* Tre righe automatiche */
     grid-template-columns: calc(24rem / 16) auto calc(24rem / 16);
+    /* Colonne per icona sinistra, contenuto, icona destra */
     margin-bottom: 1rem;
     position: relative;
     padding: 0.25em;
 
+    /* Se il tipo è "radio", cambia layout in flex verticale */
     &:where(.radio) {
         display: flex;
         flex-direction: column;
     }
 }
 
+/* ==================================================
+   Layout dinamico in presenza di icone
+   ================================================== */
+
+/* Se presente un'icona (escl. radio), aggiunge spazio a destra */
 .container:has(.icon) input:not([type="radio"]) {
     padding-right: calc(24rem / 16);
 }
 
+/* Se l’icona è a sinistra, aggiunge padding sinistro e riduce quello destro */
 .container:has(.icon.left) input:not([type="radio"]) {
     padding-left: calc(24rem / 16);
-    padding-right: 0.25;
+    padding-right: 0.25rem;
+    /* Corretto: aggiunta unità */
 }
 
+/* ==================================================
+   Icona decorativa (SVG)
+   ================================================== */
 .icon {
     grid-row: 2/3;
+    /* Allineata alla riga dell’input */
     grid-column: 3/4;
+    /* Di default a destra */
     display: flex;
     align-items: center;
     justify-content: center;
     width: calc(24rem / 16);
+    /* Spazio riservato all’icona */
     pointer-events: none;
+    /* Non interferisce con l’input */
 
+    /* Se specificato .left, si posiziona a sinistra */
     &:where(.left) {
         grid-column: 1/2;
     }
 }
 
+/* Dimensione dell'icona SVG */
 svg {
     height: 1rem;
     width: 1rem;
 }
 
+/* ==================================================
+   Etichette del campo (label o titolo radio)
+   ================================================== */
 :is(label, .label) {
     color: light-dark(var(--color-gray-9), var(--color-gray-1));
+    /* Compatibile con tema chiaro/scuro */
     grid-row: 1/2;
     grid-column: 1/4;
+    /* Occupa tutte le colonne */
     font-weight: 800;
     cursor: pointer;
     font-size: var(--font-size-sm);
     margin-bottom: 0.25em;
-
 }
 
+/* ==================================================
+   Contenitore del campo (input/select/radio)
+   ================================================== */
 .input-container {
     display: grid;
     grid-template-rows: subgrid;
+    /* Eredita le righe dal contenitore principale */
     grid-row: 2/3;
     grid-column: 1/4;
     border: 1px solid light-dark(var(--color-gray-9), var(--color-gray-1));
     border-radius: 0.25rem;
 
+    /* Per input di tipo radio: cambia layout e stile */
     &:has(input[type="radio"]) {
         display: flex;
         gap: var(--spacing-md);
         border: none;
     }
 
+    /* Ogni radio ha la sua label, allineata orizzontalmente */
     label {
         display: flex;
         align-items: center;
@@ -72,17 +105,23 @@ svg {
     }
 }
 
+/* Evidenziazione focus a livello di contenitore */
 .input-container:has(:where(input, select):focus-visible) {
     outline: 2px solid light-dark(var(--color-gray-9), var(--color-gray-1));
 }
 
+/* ==================================================
+   Input di base e select
+   ================================================== */
 input:not([type="radio"]),
 select {
     min-height: calc(28rem / 16);
+    /* Altezza coerente per campi singoli */
     border-radius: 0.25rem;
     border: none;
 }
 
+/* Rimozione outline standard quando il campo è a fuoco */
 :where(input, select):focus {
     outline: none;
 }
