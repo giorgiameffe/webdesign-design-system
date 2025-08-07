@@ -58,6 +58,18 @@ svg {
     grid-column: 1/4;
     border: 1px solid light-dark(var(--color-gray-9), var(--color-gray-1));
     border-radius: 0.25rem;
+
+    &:has(input[type="radio"]) {
+        display: flex;
+        gap: var(--spacing-md);
+        border: none;
+    }
+
+    label {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+    }
 }
 
 .input-container:has(:where(input, select):focus-visible) {
@@ -66,8 +78,9 @@ svg {
 
 input:not([type="radio"]),
 select {
-    min-height: calc(16rem / 16);
-
+    min-height: calc(28rem / 16);
+    border-radius: 0.25rem;
+    border: none;
 }
 
 :where(input, select):focus {
