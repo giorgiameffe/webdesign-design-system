@@ -12,6 +12,10 @@
     position: relative;
 }
 
+.container:has(.icon) input:not([type="radio"]) {
+    padding-right: calc(24rem / 16);
+}
+
 .icon {
     grid-row: 2/3;
     grid-column: 3/4;
@@ -19,6 +23,11 @@
     align-items: center;
     justify-content: center;
     width: calc(24rem / 16);
+    pointer-events: none;
+
+    &:where(.left) {
+        grid-column: 1/2;
+    }
 }
 
 svg {
@@ -41,6 +50,6 @@ input:not([type="radio"]),
 select {
     grid-row: 2/3;
     grid-column: 1/4;
-    min-height: calc(24rem / 16);
+    min-height: calc(16rem / 16);
 
 }

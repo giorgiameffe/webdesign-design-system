@@ -27,6 +27,8 @@ import * as Icon from "react-feather";
 // Definisce le props per un input standard
 type InputProps = {
     kind: "text" | "email" | "password"; // Specifica il tipo di input base
+    icon?: keyof typeof Icon;
+    iconPosition?: "left" | "right";
 } & React.InputHTMLAttributes<HTMLInputElement>; // Estende tutte le props standard degli <input>
 
 
@@ -36,6 +38,7 @@ type SelectProps = {
     options: { label: string; value: string }[]; // Lista delle opzioni da mostrare nel <select>
     placeholder?: string; // Opzionale: prima opzione disabilitata
     icon?: never;
+    iconPosition?: never;
 } & React.SelectHTMLAttributes<HTMLSelectElement>; // Props standard di <select>
 
 
@@ -46,6 +49,7 @@ type RadioProps = {
     placeholder?: never; // I radio non supportano placeholder
     icon?: never;
     name: string; // Obbligatorio per raggruppare i radio buttons
+    iconPosition?: never;
 } & React.InputHTMLAttributes<HTMLInputElement>; // Props standard degli <input>
 
 
@@ -104,7 +108,7 @@ export const InternalInput: React.FC<InputProps | SelectProps | RadioProps> = (
 
 // Il componente `Input` principale, responsabile di renderizzare l'etichetta e l'`InternalInput`.
 // È il componente che dovrebbe essere utilizzato dal resto dell'applicazione.
-export const Input: React.FC<GeneralInputProps> = ({ label, id, className, icon, ...props }) => {
+export const Input: React.FC<GeneralInputProps> = ({ label, id, className, icon, iconPosition, ...props }) => {
 
     // Usa useId per generare un ID se non è stato passato (NB: questo ignora il valore di `id` se definito)
     const defaultId = React.useId() || id;
@@ -127,7 +131,7 @@ export const Input: React.FC<GeneralInputProps> = ({ label, id, className, icon,
                 {/* Mostra l’input vero e proprio */}
                 <InternalInput {...props} id={defaultId} />
                 {IconComponent &&
-                    <div className="icon" >
+                    <div className={`icon ${iconPosition || ""}`} >
                         <IconComponent />
                     </div>}
             </div>

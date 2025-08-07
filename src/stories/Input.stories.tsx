@@ -37,7 +37,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
     render: ({ label }) => (
         <div>
-            <Input label={label} kind="text" icon="Bluetooth" />
+            <Input label={label} kind="text" icon="Book" iconPosition="left" />
             <Input
                 label={label}                // Etichetta del campo
                 options={[                  // Opzioni del menu a discesa
