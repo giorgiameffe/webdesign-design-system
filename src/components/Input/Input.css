@@ -1,28 +1,30 @@
 .container {
     display: grid;
     grid-template-rows: repeat(3, auto);
-    grid-template-columns: calc(42rem / 16) auto;
-    margin-bottom: 1rem;
-    position: relative;
+    grid-template-columns: calc(24rem / 16) auto calc(42rem / 16);
 
     &:where(.radio) {
         display: flex;
         flex-direction: column;
     }
+
+    margin-bottom: 1rem;
+    position: relative;
 }
 
-.container svg {
-    position: absolute;
-    top: 50%;
-    left: 0.75rem;
-    transform: translateY(-50%);
-    width: 1rem;
+.icon {
+    grid-row: 2/3;
+    grid-column: 3/4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(24rem / 16);
+}
+
+svg {
     height: 1rem;
-    color: light-dark(var(--color-gray-12), var(--color-gray-1));
+    width: 1rem;
 }
-
-/* .container:has(svg) input:not([type="radio"]),
-.container:has(svg) select {} */
 
 :is(label, .label) {
     color: light-dark(var(--color-gray-12), var(--color-gray-1));
@@ -32,10 +34,13 @@
     cursor: pointer;
     font-size: var(--font-size-sm);
     margin-bottom: 0.25em;
+
 }
 
 input:not([type="radio"]),
 select {
     grid-row: 2/3;
     grid-column: 1/4;
+    min-height: calc(24rem / 16);
+
 }

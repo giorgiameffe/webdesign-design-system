@@ -113,7 +113,6 @@ export const Input: React.FC<GeneralInputProps> = ({ label, id, className, icon,
 
     return (
         <root.div>
-            {IconComponent && <IconComponent />}
             {/* Inietta dinamicamente lo stile CSS del componente */}
             <style>{css}</style>
             <div className={`${className ?? ""} container ${props.kind}`}>
@@ -127,6 +126,10 @@ export const Input: React.FC<GeneralInputProps> = ({ label, id, className, icon,
 
                 {/* Mostra l’input vero e proprio */}
                 <InternalInput {...props} id={defaultId} />
+                {IconComponent &&
+                    <div className="icon" >
+                        <IconComponent />
+                    </div>}
             </div>
         </root.div>
     )
