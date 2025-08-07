@@ -15,6 +15,12 @@
 // Importa React per poter usare JSX e gli hook (come useId)
 import React from "react";
 
+// Importa react-shadow per creare un Shadow DOM
+import root from "react-shadow";
+
+// Importa il CSS raw come stringa per iniettarlo dinamicamente
+import css from "./Input.css?raw";
+
 
 // Definisce le props per un input standard
 type InputProps = {

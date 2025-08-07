@@ -56,7 +56,7 @@ export const Default: Story = {
                 name="Giorgia"              // Nome condiviso per raggruppare i radio
             />
         </div>
-    ),
+    )
 }
 
 // Storia Input base
@@ -77,7 +77,7 @@ export const Select: Story = {
             ]}
             kind="select"               // Specifica che si tratta di un select
         />
-    ),
+    )
 };
 
 // Storia per il Radio
@@ -93,5 +93,5 @@ export const Radio: Story = {
             kind="radio"                // Qui chiedi una versione "radio"
             name="Giorgia"              // Nome condiviso per raggruppare i radio
         />
-    ),
+    )
 };
