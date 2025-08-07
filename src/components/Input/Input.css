@@ -3,3 +3,8 @@
     grid-template-rows: repeat(3, auto);
     grid-template-columns: calc(42rem / 16) auto;
 }
+
+:is(label, .label) {
+    grid-row: 1/2;
+    grid-column: 1/4;
+}
