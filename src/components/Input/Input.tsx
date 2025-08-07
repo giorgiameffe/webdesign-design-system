@@ -22,6 +22,7 @@ import root from "react-shadow";
 import css from "./Input.css?raw";
 
 import * as Icon from "react-feather";
+import { GlobalStyles } from "../GlobalStyles";
 
 
 // Definisce le props per un input standard
@@ -117,6 +118,7 @@ export const Input: React.FC<GeneralInputProps> = ({ label, id, className, icon,
 
     return (
         <root.div>
+            <GlobalStyles />
             {/* Inietta dinamicamente lo stile CSS del componente */}
             <style>{css}</style>
             <div className={`${className ?? ""} container ${props.kind}`}>
@@ -131,7 +133,7 @@ export const Input: React.FC<GeneralInputProps> = ({ label, id, className, icon,
                 {/* Mostra l’input vero e proprio */}
                 <InternalInput {...props} id={defaultId} />
                 {IconComponent &&
-                    <div className={`icon ${iconPosition || ""}`} >
+                    <div className={`icon ${iconPosition || "right"}`} >
                         <IconComponent />
                     </div>}
             </div>

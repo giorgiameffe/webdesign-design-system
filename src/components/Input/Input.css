@@ -2,18 +2,23 @@
     display: grid;
     grid-template-rows: repeat(3, auto);
     grid-template-columns: calc(24rem / 16) auto calc(24rem / 16);
+    margin-bottom: 1rem;
+    position: relative;
+    padding: 0.25em;
 
     &:where(.radio) {
         display: flex;
         flex-direction: column;
     }
-
-    margin-bottom: 1rem;
-    position: relative;
 }
 
 .container:has(.icon) input:not([type="radio"]) {
     padding-right: calc(24rem / 16);
+}
+
+.container:has(.icon.left) input:not([type="radio"]) {
+    padding-left: calc(24rem / 16);
+    padding-right: 0.25;
 }
 
 .icon {

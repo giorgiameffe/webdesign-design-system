@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 // Importa il componente Input da testare
 import { Input } from "../components/Input/Input";
+import { GlobalStyles } from "../components/GlobalStyles";
 
 // Definizione dei meta-dati della "storia"
 const meta: Meta = {
@@ -37,7 +38,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
     render: ({ label }) => (
         <div>
-            <Input label={label} kind="text" icon="Book" iconPosition="left" />
+            <Input label={label} kind="text" icon="Book" iconPosition="left" placeholder="Placeholder" />
             <Input
                 label={label}                // Etichetta del campo
                 options={[                  // Opzioni del menu a discesa
