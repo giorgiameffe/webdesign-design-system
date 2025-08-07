@@ -35,6 +35,7 @@ type SelectProps = {
     kind: "select"; // Discriminatore per il tipo "select"
     options: { label: string; value: string }[]; // Lista delle opzioni da mostrare nel <select>
     placeholder?: string; // Opzionale: prima opzione disabilitata
+    icon?: never;
 } & React.SelectHTMLAttributes<HTMLSelectElement>; // Props standard di <select>
 
 
@@ -43,6 +44,7 @@ type RadioProps = {
     kind: "radio"; // Discriminatore per il tipo "radio"
     options: { label: string; value: string }[]; // Opzioni da mappare come radio buttons
     placeholder?: never; // I radio non supportano placeholder
+    icon?: never;
     name: string; // Obbligatorio per raggruppare i radio buttons
 } & React.InputHTMLAttributes<HTMLInputElement>; // Props standard degli <input>
 
