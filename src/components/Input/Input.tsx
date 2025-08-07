@@ -124,7 +124,7 @@ export const Input: React.FC<GeneralInputProps> = ({ label, id, className, icon,
             <div className={`${className ?? ""} container ${props.kind}`}>
                 {/* Se è un gruppo di radio button, mostra il label come semplice testo */}
                 {props.kind === "radio" ? (
-                    <span>{label}</span>
+                    <span className="label">{label}</span>
                 ) : (
                     // Altrimenti, crea un elemento <label> associato all'input
                     <label htmlFor={defaultId}>{label}</label>
