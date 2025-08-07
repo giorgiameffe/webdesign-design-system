@@ -21,6 +21,8 @@ import root from "react-shadow";
 // Importa il CSS raw come stringa per iniettarlo dinamicamente
 import css from "./Input.css?raw";
 
+import * as Icon from "react-feather";
+
 
 // Definisce le props per un input standard
 type InputProps = {
@@ -49,6 +51,7 @@ type RadioProps = {
 // che è obbligatoria per tutti.
 type GeneralInputProps = (InputProps | SelectProps | RadioProps) & {
     label: React.ReactNode; // Etichetta da mostrare sopra o accanto all'input
+    icon?: keyof typeof Icon;
 };
 
 
@@ -99,13 +102,16 @@ export const InternalInput: React.FC<InputProps | SelectProps | RadioProps> = (
 
 // Il componente `Input` principale, responsabile di renderizzare l'etichetta e l'`InternalInput`.
 // È il componente che dovrebbe essere utilizzato dal resto dell'applicazione.
-export const Input: React.FC<GeneralInputProps> = ({ label, id, className, ...props }) => {
+export const Input: React.FC<GeneralInputProps> = ({ label, id, className, icon, ...props }) => {
 
     // Usa useId per generare un ID se non è stato passato (NB: questo ignora il valore di `id` se definito)
     const defaultId = React.useId() || id;
 
+    const IconComponent = icon ? Icon[icon] : null;
+
     return (
         <root.div>
+            {IconComponent && <IconComponent />}
             {/* Inietta dinamicamente lo stile CSS del componente */}
             <style>{css}</style>
             <div className={`${className ?? ""} container ${props.kind}`}>
