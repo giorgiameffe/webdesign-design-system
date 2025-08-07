@@ -35,7 +35,28 @@ type Story = StoryObj<typeof meta>;
 // =======================================
 
 export const Default: Story = {
-    render: ({ label }) => <div><Input label={label} kind="text" /></div>
+    render: ({ label }) => (
+        <div>
+            <Input label={label} kind="text" />
+            <Input
+                label={label}                // Etichetta del campo
+                options={[                  // Opzioni del menu a discesa
+                    { label: "Option 1", value: "1" },
+                    { label: "Option 2", value: "2" },
+                ]}
+                kind="select"               // Specifica che si tratta di un select
+            />
+            <Input
+                label={label}               // Etichetta del gruppo di radio
+                options={[                  // Opzioni dei radio button (stessa struttura del select)
+                    { label: "Option 1", value: "1" },
+                    { label: "Option 2", value: "2" },
+                ]}
+                kind="radio"                // Qui chiedi una versione "radio"
+                name="Giorgia"              // Nome condiviso per raggruppare i radio
+            />
+        </div>
+    ),
 }
 
 // Storia Input base
