@@ -2,9 +2,21 @@
     display: grid;
     grid-template-rows: repeat(3, auto);
     grid-template-columns: calc(42rem / 16) auto;
+    margin-bottom: 1rem;
+
+    &:where(.radio) {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 :is(label, .label) {
     grid-row: 1/2;
+    grid-column: 1/4;
+}
+
+input:not([type="radio"]),
+select {
+    grid-row: 2/3;
     grid-column: 1/4;
 }

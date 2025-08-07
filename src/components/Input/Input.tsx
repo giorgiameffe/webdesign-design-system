@@ -108,7 +108,7 @@ export const Input: React.FC<GeneralInputProps> = ({ label, id, className, ...pr
         <root.div>
             {/* Inietta dinamicamente lo stile CSS del componente */}
             <style>{css}</style>
-            <div className={`${className ?? ""} container`}>
+            <div className={`${className ?? ""} container ${props.kind}`}>
                 {/* Se è un gruppo di radio button, mostra il label come semplice testo */}
                 {props.kind === "radio" ? (
                     <span>{label}</span>
