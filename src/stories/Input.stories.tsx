@@ -34,10 +34,14 @@ type Story = StoryObj<typeof meta>;
 // STORIE
 // =======================================
 
-// Storia Input base
 export const Default: Story = {
+    render: ({ label }) => <div><Input label={label} kind="text" /></div>
+}
+
+// Storia Input base
+export const InputStory: Story = {
     // Funzione che restituisce il componente in versione base (input di tipo text)
-    render: ({ label }) => <Input label={label} kind="text" />,
+    render: ({ label }) => <Input label={label} kind="text" />
 };
 
 // Storia per la Select
