@@ -3,7 +3,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 // Importa il componente Input da testare
 import { Input } from "../components/Input/Input";
-import { GlobalStyles } from "../components/GlobalStyles";
 
 // Definizione dei meta-dati della "storia"
 const meta: Meta = {
