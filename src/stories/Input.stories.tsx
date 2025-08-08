@@ -36,10 +36,10 @@ type Story = StoryObj<typeof meta>;
 
 // Storia che mostra tutte le varianti dell'input in un unico esempio
 export const Default: Story = {
-    render: ({ label }) => (
+    render: ({ label, isInvalid }) => (
         <div>
             {/* Input standard con icona */}
-            <Input errorText="Invalid email" label={label} kind="email" icon="Book" iconPosition="left" placeholder="Placeholder" />
+            <Input errorText="Invalid email" isInvalid={isInvalid} label={label} kind="email" icon="Book" iconPosition="left" placeholder="Placeholder" />
 
             {/* Input di tipo select con opzioni */}
             <Input

@@ -60,6 +60,7 @@ type GeneralInputProps = (InputProps | SelectProps | RadioProps) & {
     label: React.ReactNode; // Etichetta da mostrare sopra o accanto all'input
     icon?: keyof typeof Icon;
     errorText?: React.ReactNode;
+    isInvalid?: boolean;
 };
 
 
@@ -117,7 +118,9 @@ export const Input: React.FC<GeneralInputProps> = ({
     icon,
     iconPosition,
     errorText,
-    ...props }) => {
+    isInvalid,
+    ...props
+}) => {
 
     // Usa useId per generare un ID se non è stato passato (NB: questo ignora il valore di `id` se definito)
     const defaultId = React.useId() || id;

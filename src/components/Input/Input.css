@@ -111,7 +111,7 @@ svg {
     outline: 2px solid var(--accent-color);
 }
 
-.container:has(input:user-invalid, select:user-invalid) {
+.container:has(isInvalid) {
     --accent-color: var(--color-red-9);
 
     .error-text {
