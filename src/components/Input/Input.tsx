@@ -136,7 +136,7 @@ export const Input: React.FC<GeneralInputProps> = ({
             <style>{css}</style>
 
             {/* Contenitore principale con classi dinamiche */}
-            <div className={`${className ?? ""} container ${props.kind}`}>
+            <div className={`${className ?? ""} container ${props.kind} ${isInvalid ? "is-invalid" : ""}`}>
                 {/* Se è un gruppo di radio button, mostra il label come semplice testo */}
                 {props.kind === "radio" ? (
                     <span className="label">{label}</span>

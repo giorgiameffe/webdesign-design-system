@@ -17,6 +17,7 @@ const meta: Meta = {
     // Imposta un argomento di default comune a tutte le storie (label del campo)
     args: {
         label: "Label",
+        isInvalid: false
     },
 
     // Tag utile per l'autodocumentazione (se usi autodocs di Storybook)
@@ -39,20 +40,23 @@ export const Default: Story = {
     render: ({ label, isInvalid }) => (
         <div>
             {/* Input standard con icona */}
-            <Input errorText="Invalid email" isInvalid={isInvalid} label={label} kind="email" icon="Book" iconPosition="left" placeholder="Placeholder" />
+            <Input errorText="Invalid email" isInvalid={isInvalid} disabled label={label} kind="email" icon="Book" iconPosition="left" placeholder="Placeholder" />
 
             {/* Input di tipo select con opzioni */}
             <Input
+                isInvalid={isInvalid}
                 label={label}                // Etichetta del campo
                 options={[                  // Opzioni del menu a discesa
                     { label: "Option 1", value: "1" },
                     { label: "Option 2", value: "2" },
                 ]}
                 kind="select"               // Specifica che si tratta di un select
+                disabled
             />
 
             {/* Input di tipo radio con opzioni */}
             <Input
+                isInvalid={isInvalid}
                 label={label}               // Etichetta del gruppo di radio
                 options={[                  // Opzioni dei radio button (stessa struttura del select)
                     { label: "Option 1", value: "1" },
@@ -60,6 +64,8 @@ export const Default: Story = {
                 ]}
                 kind="radio"                // Qui chiedi una versione "radio"
                 name="Giorgia"              // Nome condiviso per raggruppare i radio
+                disabled
+                errorText="Invalid selection"
             />
         </div>
     )
