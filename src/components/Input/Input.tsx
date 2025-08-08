@@ -110,7 +110,14 @@ export const InternalInput: React.FC<InputProps | SelectProps | RadioProps> = (
 
 // Il componente `Input` principale, responsabile di renderizzare l'etichetta e l'`InternalInput`.
 // È il componente che dovrebbe essere utilizzato dal resto dell'applicazione.
-export const Input: React.FC<GeneralInputProps> = ({ label, id, className, icon, iconPosition, ...props }) => {
+export const Input: React.FC<GeneralInputProps> = ({
+    label,
+    id,
+    className,
+    icon,
+    iconPosition,
+    errorText,
+    ...props }) => {
 
     // Usa useId per generare un ID se non è stato passato (NB: questo ignora il valore di `id` se definito)
     const defaultId = React.useId() || id;
@@ -145,6 +152,7 @@ export const Input: React.FC<GeneralInputProps> = ({ label, id, className, icon,
                         </div>
                     )}
                 </div>
+                {errorText && <span className="error-text">{errorText}</span>}
             </div>
         </root.div >
     )
