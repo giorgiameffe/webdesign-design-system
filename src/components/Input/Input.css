@@ -2,6 +2,7 @@
    Contenitore principale del componente Input
    ================================================== */
 .container {
+    --accent-color: light-dark(var(--color-gray-9), var(--color-gray-1));
     display: grid;
     /* Layout a griglia per disporre label, input e icona */
     grid-template-rows: repeat(3, auto);
@@ -107,7 +108,11 @@ svg {
 
 /* Evidenziazione focus a livello di contenitore */
 .input-container:has(:where(input, select):focus-visible) {
-    outline: 2px solid light-dark(var(--color-gray-9), var(--color-gray-1));
+    outline: 2px solid var(--accent-color);
+}
+
+.container:has(input:user-invalid, select:user-invalid) {
+    --accent-color: var(--color-red-9);
 }
 
 /* ==================================================
