@@ -39,7 +39,7 @@ export const Default: Story = {
     render: ({ label }) => (
         <div>
             {/* Input standard con icona */}
-            <Input label={label} kind="email" icon="Book" iconPosition="left" placeholder="Placeholder" />
+            <Input errorText="Invalid email" label={label} kind="email" icon="Book" iconPosition="left" placeholder="Placeholder" />
 
             {/* Input di tipo select con opzioni */}
             <Input

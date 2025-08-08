@@ -59,6 +59,7 @@ type RadioProps = {
 type GeneralInputProps = (InputProps | SelectProps | RadioProps) & {
     label: React.ReactNode; // Etichetta da mostrare sopra o accanto all'input
     icon?: keyof typeof Icon;
+    errorText?: React.ReactNode;
 };
 
 
