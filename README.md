@@ -60,7 +60,7 @@ Assicurati di avere installato sul sistema:
 Clona il repository e installa le dipendenze:
 
 ```bash
-git clone https://tuo-repository-url.git
+git clone https://github.com/giorgiameffe/webdesign-design-system
 cd webdesign-design-system
 npm install
 ```
