@@ -1,4 +1,4 @@
-# 🎨 Design System
+# 🎨 UI Design System – Componenti, Stories e Test
 
 **Sistema di Design per Interfacce Utente**  
 Questo progetto contiene un sistema di design creato per standardizzare e accelerare lo sviluppo di interfacce utente. Utilizza **Storybook** per documentare e testare i componenti in modo isolato.
@@ -10,7 +10,10 @@ Questo progetto contiene un sistema di design creato per standardizzare e accele
 Il progetto è organizzato in modo modulare per facilitare la gestione e la riusabilità dei componenti.
 
 - **components/**  
-  Contiene tutti i componenti riutilizzabili dell'interfaccia utente (UI).
+  Contiene tutti i componenti riutilizzabili dell'interfaccia utente (UI). Attualmente include:
+  - `Badge`
+  - `Tabs`
+  - `Input`
 
 - **Tabs/**  
   Esempio di componente complesso, con file dedicati per le diverse parti:  
@@ -18,13 +21,17 @@ Il progetto è organizzato in modo modulare per facilitare la gestione e la rius
 
 - **stories/**  
   Directory dedicata alla documentazione dei componenti con Storybook.  
-  Ogni componente ha il suo file `.stories.tsx` che mostra i vari stati e varianti.
+  Ogni componente ha il suo file `.stories.tsx` che mostra i vari stati e varianti.  
 
-  Esempi:
-  - `Badges.stories.tsx`
-  - `Color.stories.tsx`
-  - `Typography.stories.tsx`
-  - ...e così via per tutti i componenti.
+  Alcune stories non rappresentano componenti ma servono a mostrare linee guida di design:  
+  - `Color.stories.tsx` → mostra la palette colori del progetto  
+  - `Typography.stories.tsx` → mostra gli stili tipografici  
+  - `Spacing.stories.tsx` → mostra le spaziature standard  
+
+  Componenti con le loro stories:  
+  - `Badges.stories.tsx`  
+  - `Tabs.stories.tsx`  
+  - `Input.stories.tsx`
 
 - **styles/**  
   Contiene i fogli di stile globali e le variabili CSS.
@@ -81,6 +88,8 @@ npm run test
 
 ### 📚 Note
 
-- Il sistema di design è pensato per componenti riutilizzabili, con attenzione alla modularità e alla documentazione.
-- Gli stili sono gestiti tramite file CSS separati per garantire chiarezza e manutenzione semplice.
-- I test sono generati con Playwright, per verificare i componenti in scenari realistici.
+- Il sistema di design è pensato per **componenti riutilizzabili**, con attenzione alla **modularità** e alla **documentazione**.
+- Alcune stories (**Color**, **Typography**, **Spacing**) non rappresentano componenti ma mostrano le **linee guida visive** del progetto.
+- I componenti effettivi del progetto sono **Badge**, **Tabs** e **Input**.
+- Gli stili sono gestiti tramite **file CSS separati** per garantire chiarezza e manutenzione semplice.
+- I test sono generati con **Playwright**, per verificare i componenti in scenari realistici.
