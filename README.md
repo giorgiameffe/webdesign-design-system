@@ -24,7 +24,7 @@ Il progetto è organizzato in modo modulare per facilitare la gestione e la rius
   Ogni componente ha il suo file `.stories.tsx` che mostra i vari stati e varianti.  
 
   Alcune stories non rappresentano componenti ma servono a mostrare linee guida di design:  
-  - `Color.stories.tsx` → mostra la palette colori del progetto  
+  - `Colors.stories.tsx` → mostra la palette colori del progetto  
   - `Typography.stories.tsx` → mostra gli stili tipografici  
   - `Spacing.stories.tsx` → mostra le spaziature standard  
 
